@@ -123,6 +123,13 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Create dummy model for build
+        run: |
+          mkdir -p models
+          # Create a minimal dummy model file so COPY doesn't fail
+          echo "dummy_model" > models/.gitkeep
+          echo "Created dummy models directory for Docker build"
+
       - name: Build Docker images
         run: |
           docker build -f Dockerfile.flask -t fraud-detection-flask:test .

@@ -108,8 +108,10 @@ jobs:
           "
 
       - name: Run pytest
+        env:
+          SKIP_API_TESTS: '1'
         run: |
-          pytest tests/ -v --tb=short 2>/dev/null || echo "No tests directory or tests failed (expected if no tests written yet)"
+          pytest tests/ -v --tb=short
 
   docker-build:
     runs-on: ubuntu-latest

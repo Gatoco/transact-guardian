@@ -85,6 +85,10 @@ Se implementó autenticación simple con API key en headers para proteger los en
 
 Credit Card Fraud Detection - 284,807 transacciones (0.17% fraudes).
 
+> **Nota:** El dataset no está incluido en el repositorio (143MB > límite de 100MB de GitHub).
+> Descárgalo de: https://www.kaggle.com/datasets/dhanushnarayananr/credit-card-fraud
+> y colócalo en la raíz del proyecto como `creditcard.csv`
+
 ## Resultados del Modelo
 
 | Métrica | Valor |

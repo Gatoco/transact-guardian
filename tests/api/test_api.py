@@ -127,15 +127,17 @@ class TestPredictBatchEndpoint:
         assert response.status_code == 401
 
     def test_batch_predict_empty_transactions(self, client, auth_headers):
-        """Test batch prediction with empty list returns error."""
+        """Test batch prediction with empty list returns empty results."""
         batch = {'transactions': []}
         response = client.post(
             '/api/v1/predict/batch',
             headers=auth_headers,
             data=json.dumps(batch)
         )
-        # Should return 400 or 500
-        assert response.status_code in [400, 500]
+        # Empty batch returns 200 with 0 results
+        assert response.status_code == 200
+        data = json.loads(response.data)
+        assert data['total_transactions'] == 0
 
     def test_batch_predict_missing_transactions_key(self, client, auth_headers):
         """Test batch prediction without 'transactions' key returns error."""

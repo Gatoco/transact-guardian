@@ -15,8 +15,8 @@ RUN pip install --no-cache-dir -r requirements_api.txt
 # Copy application code
 COPY src/api/ ./src/api/
 
-# Copy models directory (optional - can be volume mounted in production)
-COPY models/ ./models/ 2>/dev/null || true
+# Copy models directory (populated via volume mount in production, or CI creates .gitkeep for build)
+COPY models/ ./models/
 
 # Create non-root user
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app

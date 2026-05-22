@@ -1,0 +1,41 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Docker
+.docker/
+
+# Database dumps
+*.sql.gz
+
+# Model files (keep the pkl but not large artifacts)
+models/*.pkl
+
+# Build artifacts
+dist/
+build/
+*.egg-info/creditcard.csv

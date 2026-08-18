@@ -111,35 +111,24 @@ Credit Card Fraud Detection - 284,807 transacciones (0.17% fraudes).
 
 ## Quick Start
 
-### 0. Imagen publicada (Docker Hub)
+### 0. Configurar variables de entorno
 
-[![Docker Hub](https://img.shields.io/badge/docker-gatoco%2Ftransact--guardian--api-2496ED?logo=docker&logoColor=white)](https://hub.docker.com/r/gatoco/transact-guardian-api)
-
-API Flask lista para usar (auth por API Key, `/health`):
+Copia el archivo de ejemplo y genera tu propia API key:
 
 ```bash
-docker pull gatoco/transact-guardian-api:latest
-
-docker run -d --name transact-api -p 5000:5000 gatoco/transact-guardian-api:latest
-
-# Verificar
-curl http://localhost:5000/health
+cp .env.example .env
+python scripts/generate_api_key.py   # genera API_KEY nueva en .env
 ```
 
-> **Nota**: la base de datos Postgres se levanta aparte con `docker-compose up -d`;
-> sin ella el estado aparece como `degraded`.
+> **Seguridad**: `.env` está en `.gitignore` — nunca lo commitees.
+> Las credenciales de Postgres se configuran vía variables de entorno (`POSTGRES_USER`, `POSTGRES_PASSWORD`) con defaults locales en `docker-compose.yml`.
 
-### 1. Generar API Key
-```bash
-python scripts/generate_api_key.py
-```
-
-### 2. Levantar servicios
+### 1. Levantar servicios
 ```bash
 docker-compose up -d
 ```
 
-### 3. Hacer predicción
+### 2. Hacer predicción
 ```bash
 export API_KEY="fk_tu-api-key-aqui"
 
@@ -152,7 +141,7 @@ curl -X POST http://localhost:5000/api/v1/predict \
   }'
 ```
 
-### 4. Ver MLflow UI
+### 3. Ver MLflow UI
 ```
 http://localhost:5001
 ```

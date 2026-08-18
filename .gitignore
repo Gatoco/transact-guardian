@@ -8,6 +8,14 @@ venv/
 env/
 .env.local
 
+# Environment files — SECURITY: never commit real credentials
+.env
+.env.*
+!.env.example
+
+# Dataset files (large, downloadable)
+*.csv
+
 # IDE
 .vscode/
 .idea/
@@ -38,4 +46,4 @@ models/*.pkl
 # Build artifacts
 dist/
 build/
-*.egg-info/creditcard.csv
+*.egg-info/

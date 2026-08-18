@@ -7,7 +7,7 @@ from psycopg2.extras import RealDictCursor
 from contextlib import contextmanager
 from typing import Optional, List, Dict, Any
 
-DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://changeme:changeme@postgres:5432/fraud_detection')
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://change_user:change_pass@postgres:5432/fraud_detection')
 
 
 @contextmanager

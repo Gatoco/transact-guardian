@@ -54,7 +54,7 @@ def api_key():
 @pytest.fixture
 def app():
     """Create Flask app for testing."""
-    os.environ['DATABASE_URL'] = 'postgresql://changeme:changeme@localhost:5432/fraud_detection'
+    os.environ['DATABASE_URL'] = 'postgresql://change_user:change_pass@localhost:5432/fraud_detection'
     os.environ['MODEL_PATH'] = os.path.join(os.path.dirname(__file__), '..', 'models', 'fraud_detection_model.pkl')
     os.environ['MODEL_THRESHOLD'] = '0.4358'
     os.environ['MODEL_VERSION'] = '1.0.0'
@@ -119,8 +119,8 @@ def db_config():
         'host': os.getenv('POSTGRES_HOST', 'localhost'),
         'port': os.getenv('POSTGRES_PORT', '5432'),
         'dbname': 'fraud_detection',
-        'user': 'changeme',
-        'password': 'changeme'
+        'user': os.getenv('POSTGRES_USER', 'change_user'),
+        'password': os.getenv('POSTGRES_PASSWORD', 'change_pass')
     }
 
 

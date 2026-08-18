@@ -6,15 +6,15 @@ services:
     container_name: fraud_postgres
     environment:
       POSTGRES_DB: fraud_detection
-      POSTGRES_USER: changeme
-      POSTGRES_PASSWORD: changeme
+      POSTGRES_USER: ${POSTGRES_USER:-change_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_pass}
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql:ro
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U changeme -d fraud_detection"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-change_user} -d fraud_detection"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -26,12 +26,12 @@ services:
       dockerfile: Dockerfile.mlflow
     command: >
       mlflow server
-      --backend-store-uri postgresql://changeme:changeme@postgres:5432/mlflow_db
+      --backend-store-uri postgresql://${POSTGRES_USER:-change_user}:${POSTGRES_PASSWORD:-change_pass}@postgres:5432/mlflow_db
       --default-artifact-root /mlruns
       --host 0.0.0.0
       --port 5001
     environment:
-      MLFLOW_TRACKING_URI: postgresql://changeme:changeme@postgres:5432/mlflow_db
+      MLFLOW_TRACKING_URI: postgresql://${POSTGRES_USER:-change_user}:${POSTGRES_PASSWORD:-change_pass}@postgres:5432/mlflow_db
     ports:
       - "5001:5001"
     depends_on:
